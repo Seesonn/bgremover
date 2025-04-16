@@ -25,7 +25,7 @@ const TeamSection = () => {
     },
     {
       id: 2,
-      name: "Bishow Chauwan",
+      name: "Bishow Chauhan",
       role: "Full Stack Developer",
       bio: "Experienced full-stack developer specializing in cloud architecture and progressive web applications.",
       image: t2,

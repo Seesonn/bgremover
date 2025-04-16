@@ -3,6 +3,10 @@
 import { useState } from "react"
 import SectionHeading from "../../../components/SectionHeading"
 import TeamMember from "../../../components/TeamMember"
+import t1 from '../../../assest/t1.jpg'
+import t2 from '../../../assest/t2.jpg'
+import t3 from '../../../assest/t3.jpg'
+import t4 from '../../../assest/t4.jpg'
 
 const TeamSection = () => {
   const teamMembers = [
@@ -11,7 +15,7 @@ const TeamSection = () => {
       name: "Sisan Bhattarai",
       role: "Full Stack Developer",
       bio: "Skilled full-stack developer with expertise in React, Node.js, and modern web frameworks. Expert in building scalable applications.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+      image: t1,
       social: {
         twitter: "#",
         linkedin: "#",
@@ -20,10 +24,10 @@ const TeamSection = () => {
     },
     {
       id: 2,
-      name: "Bishow Chauwan",
+      name: "Bishow Chauhan",
       role: "Full Stack Developer",
       bio: "Experienced full-stack developer specializing in cloud architecture and progressive web applications.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop",
+      image: t2,
       social: {
         twitter: "#",
         linkedin: "#",
@@ -35,7 +39,7 @@ const TeamSection = () => {
       name: "Manish Dev",
       role: "UI/UX Designer",
       bio: "Creative UI/UX designer with a passion for creating intuitive and beautiful user experiences.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop",
+      image: t3,
       social: {
         twitter: "#",
         linkedin: "#",
@@ -47,7 +51,7 @@ const TeamSection = () => {
       name: "Sagar Pokherel",
       role: "UI/UX Designer",
       bio: "Award-winning designer with expertise in user research and creating accessible digital experiences.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop",
+      image: t4,
       social: {
         twitter: "#",
         linkedin: "#",
