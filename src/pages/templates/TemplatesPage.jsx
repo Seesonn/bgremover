@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useState, useEffect } from "react"
 import { templates } from "../../data/templates"
@@ -20,6 +20,9 @@ const TemplatesPage = () => {
   const categories = [
     { id: "all", name: "All Templates" },
     { id: "event", name: "Event" },
+    { id: "birthday", name: "Birthday" },
+    { id: "Office", name: "office" },
+
    
   ]
 

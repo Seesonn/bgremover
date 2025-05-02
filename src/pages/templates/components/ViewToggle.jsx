@@ -1,4 +1,4 @@
-"use client"
+
 
 const ViewToggle = ({ selected, onChange }) => {
   return (

@@ -7,6 +7,7 @@ import t1 from '../../../assest/t1.jpg'
 import t2 from '../../../assest/t2.jpg'
 import t3 from '../../../assest/t3.jpg'
 import t4 from '../../../assest/t4.jpg'
+import t5 from '../../../assest/t5.jpg'
 
 const TeamSection = () => {
   const teamMembers = [
@@ -58,6 +59,18 @@ const TeamSection = () => {
         github: "#",
       },
     },
+    {
+          id: 5,
+          name: "Swastika Gurung",
+          role: "UI/UX Designer",
+          bio: "Passionate about creating intuitive designs that improve user experiences. Specializes in accessibility and clean interfaces.",
+          image: t5,
+          social: {
+            twitter: "#",
+            linkedin: "#",
+            github: "#",
+          },
+        }
    
   ]
 
@@ -71,7 +84,7 @@ const TeamSection = () => {
           subtitle="We're a team of passionate experts dedicated to creating the best background removal technology in the world."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
           {teamMembers.map((member) => (
             <TeamMember
               key={member.id}

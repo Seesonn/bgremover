@@ -12,7 +12,7 @@ const HowItWorksSection = () => {
       number: 2,
       title: "Remove Background",
       description:
-        "Our AI instantly analyzes your image and removes the background with precision, even around complex edges.",
+        "Our System instantly analyzes your image and removes the background with precision, even around complex edges.",
     },
     {
       number: 3,
@@ -26,7 +26,7 @@ const HowItWorksSection = () => {
     <div id="how-it-works" className="py-10">
       <SectionHeading
         title="How It Works"
-        subtitle="Our advanced AI technology makes background removal simple and accurate in just three easy steps."
+        subtitle="Our  technology makes background removal simple and accurate in just three easy steps."
       />
 
       <div className="relative">

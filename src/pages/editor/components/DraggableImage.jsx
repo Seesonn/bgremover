@@ -1,139 +1,61 @@
-
-
-import { useState, useEffect, useRef, forwardRef } from "react"
+import { forwardRef, useRef } from "react"
 
 const DraggableImage = forwardRef(
-  ({ imageUrl, position, scale, rotation = 0, onPositionChange, imageDimensions }, ref) => {
-    const [isDragging, setIsDragging] = useState(false)
-    const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-    const imageRef = useRef(null)
+  ({ imageUrl, position, scale, rotation, imageDimensions, onPositionChange }, ref) => {
+    const dragging = useRef(false)
+    const offset = useRef({ x: 0, y: 0 })
 
-    // Expose the image element through the forwarded ref
-    useEffect(() => {
-      if (ref) {
-        ref.current = imageRef.current
+    const onPointerDown = e => {
+      dragging.current = true
+      offset.current = {
+        x: e.clientX - position.x,
+        y: e.clientY - position.y,
       }
-    }, [ref])
-
-    useEffect(() => {
-      const handleMouseMove = (e) => {
-        if (!isDragging) return
-
-        const dx = e.clientX - dragStart.x
-        const dy = e.clientY - dragStart.y
-
-        onPositionChange({
-          x: position.x + dx,
-          y: position.y + dy,
-        })
-
-        setDragStart({
-          x: e.clientX,
-          y: e.clientY,
-        })
-      }
-
-      const handleMouseUp = () => {
-        setIsDragging(false)
-        document.body.style.cursor = "default"
-      }
-
-      if (isDragging) {
-        document.addEventListener("mousemove", handleMouseMove)
-        document.addEventListener("mouseup", handleMouseUp)
-        document.body.style.cursor = "grabbing"
-      }
-
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove)
-        document.removeEventListener("mouseup", handleMouseUp)
-        document.body.style.cursor = "default"
-      }
-    }, [isDragging, dragStart, position, onPositionChange])
-
-    const handleMouseDown = (e) => {
-      setIsDragging(true)
-      setDragStart({
-        x: e.clientX,
-        y: e.clientY,
-      })
-      e.preventDefault()
+      window.addEventListener("pointermove", onPointerMove)
+      window.addEventListener("pointerup", onPointerUp)
     }
-
-    // Touch events for mobile support
-    const handleTouchStart = (e) => {
-      setIsDragging(true)
-      setDragStart({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-      })
-    }
-
-    const handleTouchMove = (e) => {
-      if (!isDragging) return
-
-      const dx = e.touches[0].clientX - dragStart.x
-      const dy = e.touches[0].clientY - dragStart.y
-
+    const onPointerMove = e => {
+      if (!dragging.current) return
       onPositionChange({
-        x: position.x + dx,
-        y: position.y + dy,
-      })
-
-      setDragStart({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
+        x: e.clientX - offset.current.x,
+        y: e.clientY - offset.current.y,
       })
     }
-
-    const handleTouchEnd = () => {
-      setIsDragging(false)
+    const onPointerUp = () => {
+      dragging.current = false
+      window.removeEventListener("pointermove", onPointerMove)
+      window.removeEventListener("pointerup", onPointerUp)
     }
+
+    const cx = imageDimensions.width / 2
+    const cy = imageDimensions.height / 2
 
     return (
-      <div
-        className="absolute"
+      <img
+        ref={ref}
+        src={imageUrl}
+        alt=""
+        draggable={false}
         style={{
-          transform: `translate(${position.x}px, ${position.y}px)`,
-          transformOrigin: "top left",
-          willChange: "transform",
+          position: "absolute",
+          left: position.x,
+          top: position.y,
+          width: imageDimensions.width,
+          height: imageDimensions.height,
+          transform: `
+            translate(-${cx}px, -${cy}px)
+            scale(${scale})
+            rotate(${rotation}deg)
+          `,
+          transformOrigin: "center center",
+          cursor: "grab",
+          userSelect: "none",
+          pointerEvents: "auto"
         }}
-      >
-        <img
-          ref={imageRef}
-          src={imageUrl || "/placeholder.svg"}
-          alt="Draggable"
-          className="draggable-image"
-          style={{
-            transform: `rotate(${rotation}deg) scale(${scale})`,
-            transformOrigin: "center center",
-            cursor: isDragging ? "grabbing" : "grab",
-            maxWidth: "none", // Prevent image from being constrained by container
-            position: "relative", // Changed from absolute to relative
-            top: 0,
-            left: 0,
-            width: imageDimensions.width || "auto",
-            height: imageDimensions.height || "auto",
-          }}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          draggable="false"
-          crossOrigin="anonymous"
-          onLoad={(e) => {
-            // When the image loads, we can get its natural dimensions
-            if (ref && !ref.current) {
-              ref.current = e.target
-            }
-          }}
-        />
-      </div>
+        onPointerDown={onPointerDown}
+      />
     )
-  },
+  }
 )
-
-// Add display name for React DevTools
-DraggableImage.displayName = "DraggableImage"
 
 export default DraggableImage
