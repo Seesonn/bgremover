@@ -1,7 +1,8 @@
-"use client"
+
 
 import { Link, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
+import bg from '../assest/bglogo.png'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
@@ -49,8 +50,8 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
           
-            <div className="bg-gradient-to-r from-[#016A70] to-[#A2C579] text-white p-2 rounded-lg">
-              <img src="https://imgs.search.brave.com/ZI0s0MEB4yimj6W9TVmor3h7Vjje0bjM9G18_fnS3Ic/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9keW5h/bWljLmJyYW5kY3Jv/d2QuY29tL2Fzc2V0/L2xvZ28vZTU0NmYw/MzMtNzIzNC00YmRi/LWJjYmEtZDJhMzFk/NjdmMjBlL2xvZ28t/c2VhcmNoLWdyaWQt/MXg_bG9nb1RlbXBs/YXRlVmVyc2lvbj0x/JnY9NjM3NjU5NzEw/MTA5MTAwMDAw" alt="BackgroundPro Logo" width={24} height={24} className="h-6 w-6" />
+            <div className="bg-gradient-to-r from-[#016A70] to-[] text-white p-2 rounded-lg">
+              <img src={bg} alt="BackgroundPro Logo" width={24} height={24} className="h-10 w-10" />
             </div>
             
 
